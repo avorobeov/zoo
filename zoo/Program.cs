@@ -28,7 +28,7 @@ namespace zoo
                 switch (userInput)
                 {
                     case "Exit":
-                        isExit = false;
+                        isExit = true;
                         break;
 
                     default:
@@ -50,12 +50,14 @@ namespace zoo
         public string Title { get; private set; }
         public int Age { get; private set; }
         public string Gender { get; private set; }
+        public string AnimalSound { get; private set; }
 
-        public Animal(string title,int age,string gender)
+        public Animal(string title,int age,string gender, string animalSound)
         {
             Title = title;
             Age = age;
             Gender = gender;
+            AnimalSound = animalSound;
         }
 
     }
@@ -65,18 +67,16 @@ namespace zoo
         private List<Animal> _animals = new List<Animal>();
 
         public string Title { get; private set; }
-        public string AnimalSound { get; private set; }
         public int NumberAnimals => _animals.Count;
 
-        public Aviary(string title, string animalSound)
+        public Aviary(string title)
         {
             Title = title;
-            AnimalSound = animalSound;
         }
 
-        public void AddAnimal(string title, int age, string gender)
+        public void AddAnimal(string title, int age, string gender, string animalSound)
         {
-            _animals.Add(new Animal(title, age, gender));
+            _animals.Add(new Animal(title, age, gender, animalSound));
         }
 
         public string GetGender(int index)
@@ -88,6 +88,16 @@ namespace zoo
             }
             return genderAnimal;
         }
+
+        public void SoundFromAviary()
+        {
+            Console.WriteLine($"Звуки из вольера:");
+
+            for (int i = 0; i < _animals.Count; i++)
+            {
+                Console.WriteLine(_animals[i].AnimalSound);
+            }
+        }
     }
 
     class Zoo
@@ -96,29 +106,29 @@ namespace zoo
 
         public void FillingZoo()
         {
-           CreateAviary("Льви", "Рычание");
-           AddAnimal(0, "Лев", 3, "Женский");
-           AddAnimal(0, "Лев", 1, "Женский");
-           AddAnimal(0, "Лев", 6, "Женский");
-           AddAnimal(0, "Лев", 3, "Мужской");
+           CreateAviary("Льви");
+           AddAnimal(0, "Лев", 3, "Женский", "Рычание");
+           AddAnimal(0, "Лев", 1, "Женский", "Рычание");
+           AddAnimal(0, "Лев", 6, "Женский", "Рычание");
+           AddAnimal(0, "Лев", 3, "Мужской", "Рычание");
 
-           CreateAviary("Лошади", "Ржание");
-           AddAnimal(1, "Лошадь", 1, "Женский");
-           AddAnimal(1, "Лошадь", 6, "Женский");
-           AddAnimal(1, "Лошадь", 3, "Женский");
-           AddAnimal(1, "Лошадь", 8, "Мужской");
+           CreateAviary("Лошади");
+           AddAnimal(1, "Лошадь", 1, "Женский", "Ржание");
+           AddAnimal(1, "Лошадь", 6, "Женский", "Ржание");
+           AddAnimal(1, "Лошадь", 3, "Женский", "Ржание");
+           AddAnimal(1, "Лошадь", 8, "Мужской", "Ржание");
 
-           CreateAviary("Вовки", "Вой");
-           AddAnimal(2, "Волк", 1, "Женский");
-           AddAnimal(2, "Волк", 1, "Мужской");
-           AddAnimal(2, "Волк", 2, "Мужской");
-           AddAnimal(2, "Волк", 5, "Мужской");
+           CreateAviary("Вовки");
+           AddAnimal(2, "Волк", 1, "Женский", "Вой");
+           AddAnimal(2, "Волк", 1, "Мужской", "Вой");
+           AddAnimal(2, "Волк", 2, "Мужской", "Вой");
+           AddAnimal(2, "Волк", 5, "Мужской", "Вой");
 
-           CreateAviary("Козы", "блеет");
-           AddAnimal(3, "Коза", 1, "Женский");
-           AddAnimal(3, "Коза", 1, "Мужской");
-           AddAnimal(3, "Коза", 2, "Мужской");
-           AddAnimal(3, "Коза", 5, "Мужской");
+           CreateAviary("Козы");
+           AddAnimal(3, "Коза", 1, "Женский", "блеет");
+           AddAnimal(3, "Коза", 1, "Мужской", "блеет");
+           AddAnimal(3, "Коза", 2, "Мужской", "блеет");
+           AddAnimal(3, "Коза", 5, "Мужской", "блеет");
         }
 
         public void ShowAviaries()
@@ -136,18 +146,20 @@ namespace zoo
 
             if (index >= 0 && index <= _aviaries.Count)
             {
-                ShowMessage($"\nНазвание вольера :{_aviaries[index].Title} \n\nКоличество Животных:{_aviaries[index].NumberAnimals}\n\nПол животных:{_aviaries[index].GetGender(index)}\n\nЭтот зверь издаёт такой звук: {_aviaries[index].AnimalSound}", ConsoleColor.Yellow);
+                ShowMessage($"\nНазвание вольера :{_aviaries[index].Title} \n\nКоличество Животных:{_aviaries[index].NumberAnimals}\n\nПол животных:{_aviaries[index].GetGender(index)}\n", ConsoleColor.Yellow);
+
+                _aviaries[index].SoundFromAviary();
             }
         }
 
-        public void AddAnimal(int index, string title, int age, string gender)
+        public void AddAnimal(int index, string title, int age, string gender,string animalSound)
         {
-            _aviaries[index].AddAnimal(title, age, gender);
+            _aviaries[index].AddAnimal(title, age, gender, animalSound);
         }
 
-        public void CreateAviary(string title, string animalSound)
+        public void CreateAviary(string title)
         {
-            _aviaries.Add(new Aviary(title, animalSound));
+            _aviaries.Add(new Aviary(title));
         }
 
         private void ShowMessage(string message, ConsoleColor color)
