@@ -12,8 +12,6 @@ namespace zoo
         {
             Zoo zoo = new Zoo();
 
-            zoo.FillingZoo();
-
             string userInput;
             bool isExit = false;
 
@@ -104,33 +102,33 @@ namespace zoo
     {
         private List<Aviary> _aviaries = new List<Aviary>();
 
-        public void FillingZoo()
+        public Zoo()
         {
-           CreateAviary("Льви");
-           AddAnimal(0, "Лев", 3, "Женский", "Рычание");
-           AddAnimal(0, "Лев", 1, "Женский", "Рычание");
-           AddAnimal(0, "Лев", 6, "Женский", "Рычание");
-           AddAnimal(0, "Лев", 3, "Мужской", "Рычание");
+            CreateAviary("Льви");
+            AddAnimal(0, "Лев", 3, "Женский", "Рычание");
+            AddAnimal(0, "Лев", 1, "Женский", "Рычание");
+            AddAnimal(0, "Лев", 6, "Женский", "Рычание");
+            AddAnimal(0, "Лев", 3, "Мужской", "Рычание");
 
-           CreateAviary("Лошади");
-           AddAnimal(1, "Лошадь", 1, "Женский", "Ржание");
-           AddAnimal(1, "Лошадь", 6, "Женский", "Ржание");
-           AddAnimal(1, "Лошадь", 3, "Женский", "Ржание");
-           AddAnimal(1, "Лошадь", 8, "Мужской", "Ржание");
+            CreateAviary("Лошади");
+            AddAnimal(1, "Лошадь", 1, "Женский", "Ржание");
+            AddAnimal(1, "Лошадь", 6, "Женский", "Ржание");
+            AddAnimal(1, "Лошадь", 3, "Женский", "Ржание");
+            AddAnimal(1, "Лошадь", 8, "Мужской", "Ржание");
 
-           CreateAviary("Вовки");
-           AddAnimal(2, "Волк", 1, "Женский", "Вой");
-           AddAnimal(2, "Волк", 1, "Мужской", "Вой");
-           AddAnimal(2, "Волк", 2, "Мужской", "Вой");
-           AddAnimal(2, "Волк", 5, "Мужской", "Вой");
+            CreateAviary("Вовки");
+            AddAnimal(2, "Волк", 1, "Женский", "Вой");
+            AddAnimal(2, "Волк", 1, "Мужской", "Вой");
+            AddAnimal(2, "Волк", 2, "Мужской", "Вой");
+            AddAnimal(2, "Волк", 5, "Мужской", "Вой");
 
-           CreateAviary("Козы");
-           AddAnimal(3, "Коза", 1, "Женский", "блеет");
-           AddAnimal(3, "Коза", 1, "Мужской", "блеет");
-           AddAnimal(3, "Коза", 2, "Мужской", "блеет");
-           AddAnimal(3, "Коза", 5, "Мужской", "блеет");
+            CreateAviary("Козы");
+            AddAnimal(3, "Коза", 1, "Женский", "блеет");
+            AddAnimal(3, "Коза", 1, "Мужской", "блеет");
+            AddAnimal(3, "Коза", 2, "Мужской", "блеет");
+            AddAnimal(3, "Коза", 5, "Мужской", "блеет");
         }
-
+      
         public void ShowAviaries()
         {
             for (int i = 0; i < _aviaries.Count; i++)
@@ -144,7 +142,7 @@ namespace zoo
 
             int index = GetNumber(userInput);
 
-            if (index >= 0 && index <= _aviaries.Count)
+            if (index >= 0 && index < _aviaries.Count)
             {
                 ShowMessage($"\nНазвание вольера :{_aviaries[index].Title} \n\nКоличество Животных:{_aviaries[index].NumberAnimals}\n\nПол животных:{_aviaries[index].GetGender(index)}\n", ConsoleColor.Yellow);
 
